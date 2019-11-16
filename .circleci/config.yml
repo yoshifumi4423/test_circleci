@@ -39,7 +39,11 @@ jobs:
       - run: ls
 
       - store_artifacts:
-          path: /coverage
+          path: coverage
           destination: /coverage-for-slack
+
+      - run: ls
+
+      - run: cd coverage
 
       - run: ls
