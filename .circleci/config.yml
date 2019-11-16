@@ -36,6 +36,8 @@ jobs:
       # run tests!
       - run: yarn test-coverage
 
+      - run: ls
+
       - store_artifacts:
           path: ~/coverage
           destination: coverage/tmp
