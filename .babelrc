@@ -1,8 +1,10 @@
 {
   "env": {
+    // テスト時にのみプラグインを適用する
     "test": {
       "plugins": [
-        "@babel/plugin-transform-modules-commonjs" // テスト時にプラグインを適用するため
+        // JestがES Modulesに対応していない問題に対処するため、babelでCommonJSに変換するためのプラグイン
+        "@babel/plugin-transform-modules-commonjs"
       ]
     }
   }
