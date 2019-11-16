@@ -36,14 +36,15 @@ jobs:
       # run tests!
       - run: yarn test-coverage
 
-      - run: ls
-
+      # カバレッジをStoreArtifactsへ保存する
       - store_artifacts:
           path: coverage
-          destination: /coverage-for-slack
+          destination: /store_artifacts_of_coverage
 
-      - run: ls
-
-      - run: cd coverage
-
-      - run: ls
+      # 保存されたカバレッジをスラックへ通知する。
+      - run:
+          name: coverage report
+          command: |
+            curl -s -S -X POST \
+                  -d "{'channel': '#test_circleci', 'Yoshi': 'coverage-report', 'text': ':circleci: coverage report: <https://14-222061429-gh.circle-artifacts.com/0/coverage-for-slack/lcov-report/index.html|open report :earth_asia: >(build $CIRCLE_BUILD_NUM)' }" \
+                  $SLACK_NOTICE_HOOK >/dev/null
